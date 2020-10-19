@@ -9,8 +9,8 @@ import Select from '@material-ui/core/Select';
 import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
 
 
-import PageForm from '../../components/PageForm/pageForm';
 
+import PageForm from '../../components/PageForm/pageForm';
 
 import PagePreview from '../../components/PagePreview/pagePreview'
 
