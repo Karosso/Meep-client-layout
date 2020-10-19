@@ -15,54 +15,47 @@ import PageForm from '../../components/PageForm/pageForm';
 import PagePreview from '../../components/PagePreview/pagePreview'
 
 import './client-profile.css';
-
-interface MyFormValues {
-  colors: IformColors;
-  logoUrl: string;
-  topBackgroundUrl: string;
-}
-
-interface IformColors {
-  primary: string;
-  secondary: string;
-  accent: string;
-  text: string;
-  background: string;
-}
+import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 
 function ClientProfile() {
 
-  const [colors, setColor] = useState<IformColors>({
-    primary: '',
-    secondary: '',
-    accent: '',
-    text: '',
-    background: '',
+  const [styleConfig, setStyleConfig] = useState<IFormValues>({
+    colors: {
+      primary: '',
+      secondary: '',
+      accent: '',
+      text: '',
+      background: '',
+    },
+
+    logoUrl: '',
+    topBackgroundUrl: ''
   });
 
 
   const [logoUrl, setLogoUrl] = useState('');
   const [topBackgroundUrl, settopBackgroundUrl] = useState('');
 
-  const initialValues: MyFormValues = { colors, logoUrl, topBackgroundUrl };
+  const initialValues: IFormValues = styleConfig;
 
   function handleChange(event: React.ChangeEvent<{ value: unknown }>) {
 
     // setColor(String(event.target.value));
   }
 
+  const onChangeForm = (styleConfig: IFormValues) => {
+
+  }
+  
   return (
     <Container id="page-client-profile" maxWidth="xl">
 
       <Grid xs={6}>
-      
-
-       <PageForm/>
+       <PageForm onChange={onChangeForm}  />
       </Grid>
 
       <Grid item xs={6}>
-        <h1>Grid Direita</h1>
-        <PagePreview/>
+        <PagePreview />
       </Grid>
 
 
