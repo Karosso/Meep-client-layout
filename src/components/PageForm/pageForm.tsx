@@ -20,25 +20,28 @@ interface IPageFormProps {
 
 const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
 
-  const [styleConfig, setStyleConfig] = useState<IFormValues>({
-    colors: {
-      primary: '',
-      secondary: '',
-      accent: '',
-      text: '',
-      background: '',
-    },
+  const [styleConfig, setStyleConfig] = useState({
 
+    colorsPrimary: '',
+    colorsSecondary: '',
+    colorsAccent: '',
+    colorsText: '',
+    colorsBackground: '',
     logoUrl: '',
     topBackgroundUrl: ''
   });
 
-  useEffect( () => {
+  const handleSubmit = (event: any) => {
+    console.log(event);
+  }
 
+  useEffect( () => {
+      const response = handleSubmit
   },[])
 
 
-  const initialValues: IFormValues = styleConfig;
+
+  // const initialValues: IFormValues = styleConfig;
 
 
   return (
@@ -48,17 +51,12 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
       <h1>Grid esquerda</h1>
 
       <Formik
-        initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          setStyleConfig(values);
-          console.log({ styleConfig, actions });
-          alert(JSON.stringify(styleConfig, null, 2));
-          actions.setSubmitting(false);
-        }}
+        initialValues={styleConfig}
+        onSubmit={handleSubmit}
       >
-        <Form className="form" >
+        {({values, handleChange, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
 
-          <Grid spacing={2} container xs={12} style={{ backgroundColor: '#1ac' }} className="form-colors">
+          <Grid spacing={2} container style={{ backgroundColor: '' }} className="form-colors">
 
             <Grid item xs={12}>
 
@@ -66,8 +64,10 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 fullWidth
                 variant="outlined"
                 label="Primary:"
-                id="colors"
-                name="colors"
+                id="primary"
+                name="colorsPrimary"
+                onChange={handleChange}
+                value={values.colorsPrimary}
               />
             </Grid>
             <Grid item xs={12}>
@@ -76,8 +76,10 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 fullWidth
                 variant="outlined"
                 label="Secondary:"
-                id="colors"
-                name="colors"
+                id="secondary"
+                name="colorsSecondary"
+                onChange={handleChange}
+                value={values.colorsSecondary}
               />
             </Grid>
             <Grid item xs={12}>
@@ -86,8 +88,10 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 fullWidth
                 variant="outlined"
                 label="Accent:"
-                id="colors"
-                name="colors"
+                id="accent"
+                name="colorsAccent"
+                onChange={handleChange}
+                value={values.colorsAccent}
               />
             </Grid>
             <Grid item xs={12}>
@@ -96,8 +100,10 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 fullWidth
                 variant="outlined"
                 label="Text:"
-                id="colors"
-                name="colors"
+                id="text"
+                name="colorsText"
+                onChange={handleChange}
+                value={values.colorsText}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,8 +112,10 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 fullWidth
                 variant="outlined"
                 label="Background:"
-                id="colors"
-                name="colors"
+                id="background"
+                name="colorsBackground"
+                onChange={handleChange}
+                value={values.colorsBackground}
               />
             </Grid>
           </Grid>
@@ -121,6 +129,8 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 type="file"
                 id="logoUrl"
                 name="logoUrl"
+                onChange={handleChange}
+                value={values.logoUrl}
               />
             </Grid>
 
@@ -132,12 +142,14 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 type="file"
                 id="topBackgroundUrl"
                 name="topBackgroundUrl"
+                onChange={handleChange}
+                value={values.topBackgroundUrl}
               />
             </Grid>
           </Grid>
 
           <Button type="submit" color="primary" variant="outlined">Submit</Button>
-        </Form>
+        </Form>}
       </Formik>
     </Container>
   );

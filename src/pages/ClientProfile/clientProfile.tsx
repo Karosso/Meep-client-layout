@@ -50,7 +50,7 @@ function ClientProfile() {
   return (
     <Container id="page-client-profile" maxWidth="xl">
 
-      <Grid xs={6}>
+      <Grid item xs={6}>
        <PageForm onChange={onChangeForm}  />
       </Grid>
 
