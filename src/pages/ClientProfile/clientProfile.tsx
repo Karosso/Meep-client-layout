@@ -6,7 +6,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import Form from '../../components/PageForm/pageForm';
+import PageForm from '../../components/PageForm/pageForm';
 
 
 import './client-profile.css';
@@ -53,7 +53,7 @@ function ClientProfile() {
       <Grid xs={6}>
       
 
-       <Form/>
+       <PageForm/>
       </Grid>
 
       <Grid item xs={6}>
