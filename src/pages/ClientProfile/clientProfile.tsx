@@ -7,7 +7,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import { Field, Form, Formik } from 'formik';
+
+
+import PageForm from '../../components/PageForm/pageForm';
+
 
 import PagePreview from '../../components/PagePreview/pagePreview'
 
@@ -52,99 +55,9 @@ function ClientProfile() {
     <Container id="page-client-profile" maxWidth="xl">
 
       <Grid xs={6}>
-        <h1>Grid esquerda</h1>
+      
 
-        <Formik
-          initialValues={initialValues}
-          onSubmit={(values, actions) => {
-            console.log({ values, actions });
-            alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
-          }}
-        >
-          <Form className="form" >
-
-            <Grid spacing={2} container xs={12} style={{backgroundColor: '#1ac' }} className="form-colors">
-
-              <Grid item xs={12}>
-
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Primary:"
-                  id="colors"
-                  name="colors"
-                />
-              </Grid>
-              <Grid item xs={12}>
-
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Secondary:"
-                  id="colors"
-                  name="colors"
-                />
-              </Grid>
-              <Grid item xs={12}>
-
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Accent:"
-                  id="colors"
-                  name="colors"
-                />
-              </Grid>
-              <Grid item xs={12}>
-
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Text:"
-                  id="colors"
-                  name="colors"
-                />
-              </Grid>
-              <Grid item xs={12}>
-
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Background:"
-                  id="colors"
-                  name="colors"
-                />
-              </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Logo:"
-                  type="file"
-                  id="logoUrl"
-                  name="logoUrl"
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Imagem Topo:"
-                  type="file"
-                  id="topBackgroundUrl"
-                  name="topBackgroundUrl"
-                />
-              </Grid>
-            </Grid>
-
-            <Button type="submit" color="primary" variant="outlined">Submit</Button>
-          </Form>
-        </Formik>
+       <PageForm/>
       </Grid>
 
       <Grid item xs={6}>
