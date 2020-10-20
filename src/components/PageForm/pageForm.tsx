@@ -84,7 +84,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
       >
         {({values, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
 
-          <Grid spacing={2} container style={{ backgroundColor: '' }} className="form-colors">
+          <Grid spacing={2} container className="form-colors">
 
             <Grid item xs={12}>
               <TextField
@@ -127,7 +127,6 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
             </Grid>
 
             <Grid item xs={12}>
-
               <TextField
                 fullWidth
                 variant="outlined"
@@ -146,8 +145,8 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 value={values.accent}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -166,8 +165,8 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 value={values.text}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -186,9 +185,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 value={values.background}
               />
             </Grid>
-          </Grid>
 
-          <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
@@ -230,9 +227,35 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 // value={values.topBackgroundUrl}
               />
             </Grid>
-          </Grid>
 
-          <Button type="submit" color="primary" variant="outlined">Submit</Button>
+            <Grid item xs={12}>
+              <label htmlFor="topBackgroundUrl">
+                <input
+                  style={{ display: 'none' }}
+                  id="topBackgroundUrl"
+                  name="topBackgroundUrl"
+                  type="file"
+                  onChange={handleChange}
+                  value={values.topBackgroundUrl}
+                />
+
+                <Button 
+                  fullWidth
+                  color="primary" 
+                  variant="outlined" 
+                  component="span"
+                  
+                >
+                  Upload Imagem Topo
+                </Button>
+              </label>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button type="submit" color="primary" variant="outlined">Submit</Button>
+            </Grid>
+
+          </Grid>
         </Form>}
       </Formik>
     </Container>

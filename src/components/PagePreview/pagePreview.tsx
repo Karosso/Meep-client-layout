@@ -29,7 +29,7 @@ const PagePreview: React.FC<IPageData> = (props ) => {
         <Paper className="">
           <Grid container spacing={2}>
             <Grid item>
-                <img className="" style={{width: '50px', height: '50px'}} alt="[]" src={{url: "data:image/jpeg;charset=utf-8;base64, QzpcZmFrZXBhdGhcbHVhLmpwZw=="}} />
+                <img className="" style={{width: '50px', height: '50px'}} alt="[]" src="data:image/jpeg;charset=utf-8;base64, QzpcZmFrZXBhdGhcbHVhLmpwZw==" />
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
