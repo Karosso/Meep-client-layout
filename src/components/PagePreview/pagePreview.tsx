@@ -4,7 +4,6 @@ import './pagePreview.css';
 import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
 
 import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
-import { url } from 'inspector';
 
 import logo from '../../assets/lua.jpg'
 

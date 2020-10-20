@@ -1,13 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
-
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 
 import './pageForm.css';
 import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
