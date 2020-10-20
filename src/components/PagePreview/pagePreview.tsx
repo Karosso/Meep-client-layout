@@ -5,7 +5,8 @@ import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } fro
 
 import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 
-import logo from '../../assets/lua.jpg'
+import Logo from '../../assets/lua.jpg'
+import  BackgroundImg from '../../assets/iStock-536613027.jpg'
 
 interface IPageData {
   styleConfig: IFormValues;
@@ -25,20 +26,21 @@ const PagePreview: React.FC<IPageData> = (props ) => {
   return (
   <Grid className="preview" container sm={12}>
 
-    <Grid item className="text-top">
-    <h1>Grid Direita</h1>
+    <Grid item className="backgorund-img">
+    <img className="logo-img" alt="[]" src={Logo}/>
+      
+    <Grid item className="logo-img">
+      <img className="img" alt="[]" src={BackgroundImg}/>
     </Grid>    
-    <Grid item className="background-logo">
-      <img className="logo-img" alt="[]" src={logo}/>
-    </Grid>    
+    </Grid>  
         <Paper className="">
-          <Grid container spacing={2} >
+          <Grid container spacing={2}>
            
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs className="card">
 
-                  <img className="card-img" alt="[]" src={logo}/>
+                  <img className="card-img" alt="[]" src={Logo}/>
                   <Grid item className="text-card">
                   <Typography gutterBottom variant="subtitle1">
                     Filé com Fritas
