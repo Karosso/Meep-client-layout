@@ -29,7 +29,7 @@ const PagePreview: React.FC<IPageData> = (props ) => {
     <h1>Grid Direita</h1>
     </Grid>    
     <Grid item className="background-logo">
-      <img className="logo-img" alt="[]" src={logo}/>
+      <img className="logo-img" alt="[]" src={props.styleConfig.topBackgroundUrl}/>
     </Grid>    
         <Paper className="">
           <Grid container spacing={2} >
@@ -38,7 +38,7 @@ const PagePreview: React.FC<IPageData> = (props ) => {
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs className="card">
 
-                  <img className="card-img" alt="[]" src={logo}/>
+                  <img className="card-img" alt="[]" src={props.styleConfig.logoUrl}/>
                   <Grid item className="text-card">
                   <Typography gutterBottom variant="subtitle1">
                     Filé com Fritas
