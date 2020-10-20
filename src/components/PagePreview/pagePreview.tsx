@@ -3,8 +3,18 @@ import React, { useState } from 'react';
 import './pagePreview.css';
 import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
 
+import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
+import { url } from 'inspector';
 
-function PagePreview() {
+
+interface IPageData {
+  styleConfig: IFormValues;
+ 
+}
+
+const PagePreview: React.FC<IPageData> = (props ) => {
+  
+  const { colors, logoUrl, topBackgroundUrl}= props.styleConfig;
 
 
   return (
@@ -14,7 +24,7 @@ function PagePreview() {
           <Grid container spacing={2}>
             <Grid item>
               <ButtonBase className="">
-                <img className="" alt="complex" src="/static/images/grid/complex.jpg" />
+                <img className="" alt="[]" src={logoUrl} />
               </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>

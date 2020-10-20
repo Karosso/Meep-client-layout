@@ -32,6 +32,10 @@ function ClientProfile() {
     topBackgroundUrl: ''
   });
 
+  function handleStyleConfig(data: IFormValues) {
+    setStyleConfig(data)
+   
+  }
 
   const [logoUrl, setLogoUrl] = useState('');
   const [topBackgroundUrl, settopBackgroundUrl] = useState('');
@@ -43,19 +47,15 @@ function ClientProfile() {
     // setColor(String(event.target.value));
   }
 
-  const onChangeForm = (styleConfig: IFormValues) => {
-
-  }
-  
   return (
     <Container id="page-client-profile" maxWidth="xl">
 
       <Grid item xs={6}>
-       <PageForm onChange={onChangeForm}  />
+       <PageForm handleStyleConfig={handleStyleConfig} />
       </Grid>
 
       <Grid item xs={6}>
-        <PagePreview />
+        <PagePreview styleConfig={styleConfig}/>
       </Grid>
 
 

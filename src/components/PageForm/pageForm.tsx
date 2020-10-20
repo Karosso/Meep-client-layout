@@ -15,10 +15,11 @@ import { IFormColors, IFormValues } from '../interfaces/IStyleConfig';
 
 
 interface IPageFormProps {
-  onChange: (styleConfig: IFormValues) => void
+  handleStyleConfig: (data: IFormValues) => void
 }
 
-const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
+
+const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
 
   const [styleConfig, setStyleConfig] = useState({
 
@@ -32,14 +33,29 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
   });
 
   const handleSubmit = (event: any) => {
-    console.log(event);
+    
+
+    const colors: IFormColors = {
+      primary: event.colorsPrimary,
+      secondary: event.colorsSecondary,
+      accent: event.colorsAccent,
+      text: event.colorsText,
+      background: event.colorsBackground
+    };
+    
+    const card: IFormValues  = {
+      colors: colors,
+      logoUrl: event.logoUrl,
+      topBackgroundUrl: event.topBackgroundUrl
+    };
+
+    handleStyleConfig(card);
+    console.log(handleStyleConfig);
+    
+
   }
 
-  useEffect( () => {
-      const response = handleSubmit
-  },[])
-
-
+ 
 
   // const initialValues: IFormValues = styleConfig;
 
