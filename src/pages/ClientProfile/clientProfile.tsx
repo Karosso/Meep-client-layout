@@ -33,6 +33,7 @@ function ClientProfile() {
   });
 
   function handleStyleConfig(data: IFormValues) {
+    // console.log(data)
     setStyleConfig(data)
    
   }

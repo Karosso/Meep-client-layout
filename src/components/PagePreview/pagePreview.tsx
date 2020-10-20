@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './pagePreview.css';
 import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
@@ -6,6 +6,7 @@ import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } fro
 import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 import { url } from 'inspector';
 
+import logo from '../../assets/lua.jpg'
 
 interface IPageData {
   styleConfig: IFormValues;
@@ -14,8 +15,13 @@ interface IPageData {
 
 const PagePreview: React.FC<IPageData> = (props ) => {
   
-  const { colors, logoUrl, topBackgroundUrl}= props.styleConfig;
+  const { colors, logoUrl, topBackgroundUrl} = props.styleConfig;
 
+
+
+  useEffect(() => {
+    console.log("page Preview: ", props.styleConfig);
+  }, [props.styleConfig]);
 
   return (
     <Container id="page-client-profile" maxWidth="xl">
@@ -23,9 +29,7 @@ const PagePreview: React.FC<IPageData> = (props ) => {
         <Paper className="">
           <Grid container spacing={2}>
             <Grid item>
-              <ButtonBase className="">
-                <img className="" alt="[]" src={logoUrl} />
-              </ButtonBase>
+                <img className="" style={{width: '50px', height: '50px'}} alt="[]" src={{url: "data:image/jpeg;charset=utf-8;base64, QzpcZmFrZXBhdGhcbHVhLmpwZw=="}} />
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>

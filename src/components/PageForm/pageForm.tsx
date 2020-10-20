@@ -21,19 +21,29 @@ interface IPageFormProps {
 
 const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
 
-  const [styleConfig, setStyleConfig] = useState({
+  interface IStyleData {
+    primary: string;
+    secondary: string;
+    accent: string;
+    text: string;
+    background: string;
+    logoUrl: string,
+    topBackgroundUrl: string
+  }
 
-    colorsPrimary: '',
-    colorsSecondary: '',
-    colorsAccent: '',
-    colorsText: '',
-    colorsBackground: '',
+  const styleData: IStyleData = {
+    primary: '',
+    secondary: '',
+    accent: '',
+    text: '',
+    background: '',
     logoUrl: '',
-    topBackgroundUrl: ''
-  });
+    topBackgroundUrl: '',  
+  };
+
+  const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);
 
   const handleSubmit = (event: any) => {
-    
 
     const colors: IFormColors = {
       primary: event.colorsPrimary,
@@ -49,15 +59,16 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
       topBackgroundUrl: event.topBackgroundUrl
     };
 
-    handleStyleConfig(card);
-    console.log(handleStyleConfig);
-    
+    handleStyleConfig(card);    
+    // console.log('handlesubmit');
 
   }
 
- 
+  const handleChange = (event: React.ChangeEvent<any>) => {
+    console.log('handlechange') ;
+    console.log(event) ;
 
-  // const initialValues: IFormValues = styleConfig;
+  }
 
 
   return (
@@ -68,36 +79,53 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
 
       <Formik
         initialValues={styleConfig}
+        enableReinitialize
         onSubmit={handleSubmit}
       >
-        {({values, handleChange, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
+        {({values, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
 
           <Grid spacing={2} container style={{ backgroundColor: '' }} className="form-colors">
 
             <Grid item xs={12}>
-
               <TextField
                 fullWidth
                 variant="outlined"
                 label="Primary:"
                 id="primary"
-                name="colorsPrimary"
-                onChange={handleChange}
-                value={values.colorsPrimary}
+                name="primary"
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      primary: e.target.value
+                    }
+                  })
+                }}
+                value={values.primary}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
                 label="Secondary:"
                 id="secondary"
-                name="colorsSecondary"
-                onChange={handleChange}
-                value={values.colorsSecondary}
+                name="secondary"
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      secondary: e.target.value
+                    }
+                  })
+                }}
+                value={values.secondary}
               />
             </Grid>
+
             <Grid item xs={12}>
 
               <TextField
@@ -105,9 +133,17 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 variant="outlined"
                 label="Accent:"
                 id="accent"
-                name="colorsAccent"
-                onChange={handleChange}
-                value={values.colorsAccent}
+                name="accent"
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      accent: e.target.value
+                    }
+                  })
+                }}
+                value={values.accent}
               />
             </Grid>
             <Grid item xs={12}>
@@ -117,9 +153,17 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 variant="outlined"
                 label="Text:"
                 id="text"
-                name="colorsText"
-                onChange={handleChange}
-                value={values.colorsText}
+                name="text"
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      text: e.target.value
+                    }
+                  })
+                }}
+                value={values.text}
               />
             </Grid>
             <Grid item xs={12}>
@@ -129,9 +173,17 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 variant="outlined"
                 label="Background:"
                 id="background"
-                name="colorsBackground"
-                onChange={handleChange}
-                value={values.colorsBackground}
+                name="background"
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      background: e.target.value
+                    }
+                  })
+                }}
+                value={values.background}
               />
             </Grid>
           </Grid>
@@ -145,8 +197,16 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 type="file"
                 id="logoUrl"
                 name="logoUrl"
-                onChange={handleChange}
-                value={values.logoUrl}
+                onChange={(e) => {
+                  console.log(btoa(e.target.value))
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      logoUrl: btoa(e.target.value)
+                    }
+                  })
+                }}
+                // value={values.logoUrl}
               />
             </Grid>
 
@@ -158,8 +218,16 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 type="file"
                 id="topBackgroundUrl"
                 name="topBackgroundUrl"
-                onChange={handleChange}
-                value={values.topBackgroundUrl}
+                onChange={(e) => {
+                  console.log(btoa(e.target.value))
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      topBackgroundUrl: btoa(e.target.value)
+                    }
+                  })
+                }}
+                // value={values.topBackgroundUrl}
               />
             </Grid>
           </Grid>
