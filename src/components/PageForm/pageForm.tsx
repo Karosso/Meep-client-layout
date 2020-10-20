@@ -56,10 +56,9 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
       >
         {({values, handleChange, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
 
-          <Grid spacing={2} container style={{ backgroundColor: '' }} className="form-colors">
+          <Grid spacing={2} container className="form-colors">
 
             <Grid item xs={12}>
-
               <TextField
                 fullWidth
                 variant="outlined"
@@ -70,8 +69,8 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 value={values.colorsPrimary}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -82,8 +81,8 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 value={values.colorsSecondary}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -94,8 +93,8 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 value={values.colorsAccent}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -106,8 +105,8 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 value={values.colorsText}
               />
             </Grid>
-            <Grid item xs={12}>
 
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -118,9 +117,7 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 value={values.colorsBackground}
               />
             </Grid>
-          </Grid>
 
-          <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 fullWidth
@@ -146,9 +143,35 @@ const PageForm: React.FC<IPageFormProps> = ({onChange}) => {
                 value={values.topBackgroundUrl}
               />
             </Grid>
-          </Grid>
 
-          <Button type="submit" color="primary" variant="outlined">Submit</Button>
+            <Grid item xs={12}>
+              <label htmlFor="topBackgroundUrl">
+                <input
+                  style={{ display: 'none' }}
+                  id="topBackgroundUrl"
+                  name="topBackgroundUrl"
+                  type="file"
+                  onChange={handleChange}
+                  value={values.topBackgroundUrl}
+                />
+
+                <Button 
+                  fullWidth
+                  color="primary" 
+                  variant="outlined" 
+                  component="span"
+                  
+                >
+                  Upload Imagem Topo
+                </Button>
+              </label>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button type="submit" color="primary" variant="outlined">Submit</Button>
+            </Grid>
+
+          </Grid>
         </Form>}
       </Formik>
     </Container>
