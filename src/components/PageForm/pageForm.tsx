@@ -39,11 +39,11 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
   const handleSubmit = (event: any) => {
 
     const colors: IFormColors = {
-      primary: event.colorsPrimary,
-      secondary: event.colorsSecondary,
-      accent: event.colorsAccent,
-      text: event.colorsText,
-      background: event.colorsBackground
+      primary: event.primary,
+      secondary: event.secondary,
+      accent: event.accent,
+      text: event.text,
+      background: event.background
     };
     
     const card: IFormValues  = {

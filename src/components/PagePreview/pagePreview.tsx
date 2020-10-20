@@ -23,41 +23,42 @@ const PagePreview: React.FC<IPageData> = (props ) => {
   }, [props.styleConfig]);
 
   return (
-    <Container id="page-client-profile" maxWidth="xl">
-        <h1>Grid Direita</h1>
+  <Grid className="preview" container sm={12}>
+
+    <Grid item className="text-top">
+    <h1>Grid Direita</h1>
+    </Grid>    
+    <Grid item className="background-logo">
+      <img className="logo-img" alt="[]" src={logo}/>
+    </Grid>    
         <Paper className="">
-          <Grid container spacing={2}>
-            <Grid item>
-                <img className="" style={{width: '50px', height: '50px'}} alt="[]" src="data:image/jpeg;charset=utf-8;base64, QzpcZmFrZXBhdGhcbHVhLmpwZw==" />
-            </Grid>
+          <Grid container spacing={2} >
+           
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
+                <Grid item xs className="card">
+
+                  <img className="card-img" alt="[]" src={logo}/>
+                  <Grid item className="text-card">
                   <Typography gutterBottom variant="subtitle1">
-                    Standard license
+                    Filé com Fritas
                     </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Full resolution 1920x1080 • JPEG
-                    </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    ID: 1030114
-                    </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                    Remove
-                    </Typography>
-                </Grid>
+                  300g de Filé - 400g de Batata Frita
+                    </Typography>    
+                  </Grid>
+                    
+                </Grid>              
               </Grid>
               <Grid item>
-                <Typography variant="subtitle1">$19.00</Typography>
+                <Typography variant="subtitle1">R$50.00</Typography>
               </Grid>
             </Grid>
           </Grid>
         </Paper>
 
-
-    </Container>
+   
+  </Grid>
   );
 }
 
