@@ -39,11 +39,11 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
   const handleSubmit = (event: any) => {
 
     const colors: IFormColors = {
-      primary: event.colorsPrimary,
-      secondary: event.colorsSecondary,
-      accent: event.colorsAccent,
-      text: event.colorsText,
-      background: event.colorsBackground
+      primary: event.primary,
+      secondary: event.secondary,
+      accent: event.accent,
+      text: event.text,
+      background: event.background
     };
     
     const card: IFormValues  = {
@@ -53,22 +53,14 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
     };
 
     handleStyleConfig(card);    
-    // console.log('handlesubmit');
+    console.log('handlesubmit', colors);
 
   }
-
-  const handleChange = (event: React.ChangeEvent<any>) => {
-    console.log('handlechange') ;
-    console.log(event) ;
-
-  }
-
 
   return (
     <Container id="form-client" maxWidth="xl">
 
-
-      <h1>Grid esquerda</h1>
+      <h1>Atributos de Estilização</h1>
 
       <Formik
         initialValues={styleConfig}
@@ -77,13 +69,13 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
       >
         {({values, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
 
-          <Grid spacing={2} container className="form-colors">
+          <Grid spacing={2} container className="form-styles">
 
             <Grid item xs={12}>
               <TextField
                 fullWidth
                 variant="outlined"
-                label="Primary:"
+                label="Cor primária:"
                 id="primary"
                 name="primary"
                 onChange={(e) => {
@@ -103,7 +95,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
               <TextField
                 fullWidth
                 variant="outlined"
-                label="Secondary:"
+                label="Cor secundária:"
                 id="secondary"
                 name="secondary"
                 onChange={(e) => {
@@ -123,7 +115,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
               <TextField
                 fullWidth
                 variant="outlined"
-                label="Accent:"
+                label="Cor de destaque:"
                 id="accent"
                 name="accent"
                 onChange={(e) => {
@@ -143,7 +135,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
               <TextField
                 fullWidth
                 variant="outlined"
-                label="Text:"
+                label="Cor de texto:"
                 id="text"
                 name="text"
                 onChange={(e) => {
@@ -161,9 +153,10 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
 
             <Grid item xs={12}>
               <TextField
+                color="primary"
                 fullWidth
                 variant="outlined"
-                label="Background:"
+                label="Cor de fundo:"
                 id="background"
                 name="background"
                 onChange={(e) => {
@@ -179,73 +172,61 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
+            <Grid className="grid-upload" item xs={12}>
+              <Button
                 fullWidth
                 variant="outlined"
-                label="Logo:"
-                type="file"
-                id="logoUrl"
-                name="logoUrl"
-                onChange={(e) => {
-                  console.log(btoa(e.target.value))
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      logoUrl: btoa(e.target.value)
-                    }
-                  })
-                }}
-                // value={values.logoUrl}
-              />
+                component="label"
+                color="primary"
+              >
+                Escolher Logo
+                <TextField
+                  id="logoUrl"
+                  name="logoUrl"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    console.log(btoa(e.target.value))
+                    setStyleConfig(prevState => {
+                      return {
+                        ...prevState,
+                        logoUrl: btoa(e.target.value)
+                      }
+                    })
+                  }}
+                />
+              </Button>
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
+            <Grid className="grid-upload" item xs={12}>
+              <Button
                 fullWidth
                 variant="outlined"
-                label="Imagem Topo:"
-                type="file"
-                id="topBackgroundUrl"
-                name="topBackgroundUrl"
-                onChange={(e) => {
-                  console.log(btoa(e.target.value))
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      topBackgroundUrl: btoa(e.target.value)
-                    }
-                  })
-                }}
-                // value={values.topBackgroundUrl}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <label htmlFor="topBackgroundUrl">
-                <input
-                  style={{ display: 'none' }}
+                component="label"
+                color="primary"
+              >
+                Escolher Imagem Topo
+                <TextField
                   id="topBackgroundUrl"
                   name="topBackgroundUrl"
                   type="file"
-                  onChange={handleChange}
-                  value={values.topBackgroundUrl}
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    console.log(btoa(e.target.value))
+                    setStyleConfig(prevState => {
+                      return {
+                        ...prevState,
+                        topBackgroundUrl: btoa(e.target.value)
+                      }
+                    })
+                  }}
                 />
-
-                <Button 
-                  fullWidth
-                  color="primary" 
-                  variant="outlined" 
-                  component="span"
-                  
-                >
-                  Upload Imagem Topo
-                </Button>
-              </label>
+              </Button>
             </Grid>
+            
 
-            <Grid item xs={12}>
-              <Button type="submit" color="primary" variant="outlined">Submit</Button>
+            <Grid className="grid-upload" item xs={12}>
+              <Button fullWidth type="submit" color="primary" variant="outlined">Submit</Button>
             </Grid>
 
           </Grid>

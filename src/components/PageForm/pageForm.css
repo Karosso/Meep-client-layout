@@ -6,6 +6,13 @@
     justify-content: center;
 }
 
-/* .form-colors TextField {
-    width: 100%;
-} */
+.form-styles .grid-upload {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-styles .grid-upload Button,label {
+    height: 56px;
+}
