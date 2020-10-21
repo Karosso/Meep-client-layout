@@ -58,9 +58,9 @@ const PagePreview: React.FC<IPageData> = (props ) => {
               value={value}
               onChange={handleChange}
               indicatorColor="primary"
-              textColor="primary"
+              textColor="inherit"
               centered
-              
+              style={{ backgroundColor: props.styleConfig.colors.toolBar, color:props.styleConfig.colors.toolBarText }}
             >
               <Tab label="Cerveja/Chopp" />
               <Tab label="Chopps" />
