@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import './pagePreview.css';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography, Tabs, Tab } from '@material-ui/core';
 
 import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 
@@ -14,6 +14,13 @@ interface IPageData {
 }
 
 const PagePreview: React.FC<IPageData> = (props ) => {
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
   
   const { colors, logoUrl, topBackgroundUrl} = props.styleConfig;
 
@@ -44,7 +51,23 @@ const PagePreview: React.FC<IPageData> = (props ) => {
                   </Grid>    
             </Grid> 
            
-        </Grid> 
+        </Grid>
+        <Grid item xs={12} >
+          <Paper >
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+              
+            >
+              <Tab label="Cerveja/Chopp" />
+              <Tab label="Chopps" />
+            
+            </Tabs>
+          </Paper>
+        </Grid>
           <Paper className="preview-card">
             <Grid container spacing={2} >           
               <Grid item xs={12} sm container>
