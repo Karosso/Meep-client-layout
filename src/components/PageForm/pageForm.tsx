@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
-
 import { Form, Formik } from 'formik';
+import { Button, Container, Grid, TextField, Input } from '@material-ui/core';
+import { IFormColors, IFormValues } from '../interfaces/IStyleConfig';
 
 import './pageForm.css';
-import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import { IFormColors, IFormValues } from '../interfaces/IStyleConfig';
 
 
 interface IPageFormProps {
@@ -36,6 +35,10 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
 
   const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);
 
+  useEffect(() => {
+    onChangePropsSender(styleConfig)
+  }, [styleConfig]) 
+
   const handleSubmit = (event: any) => {
 
     const colors: IFormColors = {
@@ -52,9 +55,47 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
       topBackgroundUrl: event.topBackgroundUrl
     };
 
-    handleStyleConfig(card);    
-    console.log('handlesubmit', colors);
+    handleStyleConfig(card);
 
+  }
+
+  const onChangePropsSender = (inputStyleProp: IStyleData) => {
+
+    const colors: IFormColors = {
+      primary: inputStyleProp.primary,
+      secondary: inputStyleProp.secondary,
+      accent: inputStyleProp.accent,
+      text: inputStyleProp.text,
+      background: inputStyleProp.background
+    };
+
+    const card: IFormValues = {
+      colors: colors,
+      logoUrl: inputStyleProp.logoUrl,
+      topBackgroundUrl: inputStyleProp.topBackgroundUrl
+    };
+
+    handleStyleConfig(card);
+
+  }
+
+  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setStyleConfig(prevState => ({ 
+      ...prevState, 
+      ...{ [event.target.name]: event.target.value } 
+    }))
+  }
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0].type.split("/")[0] === "image") {
+      event.persist()
+      const fileString = await toBase64(event.target.files[0])
+
+      setStyleConfig(prevState =>  ({ 
+        ...prevState, 
+        ...{ [event.target.name]: fileString } 
+      }))
+    }
   }
 
   return (
@@ -78,15 +119,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 label="Cor primária:"
                 id="primary"
                 name="primary"
-                onChange={(e) => {
-                  console.log(e.target.value)
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      primary: e.target.value
-                    }
-                  })
-                }}
+                onChange={handleColorChange}
                 value={values.primary}
               />
             </Grid>
@@ -98,15 +131,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 label="Cor secundária:"
                 id="secondary"
                 name="secondary"
-                onChange={(e) => {
-                  console.log(e.target.value)
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      secondary: e.target.value
-                    }
-                  })
-                }}
+                onChange={handleColorChange}
                 value={values.secondary}
               />
             </Grid>
@@ -118,15 +143,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 label="Cor de destaque:"
                 id="accent"
                 name="accent"
-                onChange={(e) => {
-                  console.log(e.target.value)
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      accent: e.target.value
-                    }
-                  })
-                }}
+                onChange={handleColorChange}
                 value={values.accent}
               />
             </Grid>
@@ -138,15 +155,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 label="Cor de texto:"
                 id="text"
                 name="text"
-                onChange={(e) => {
-                  console.log(e.target.value)
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      text: e.target.value
-                    }
-                  })
-                }}
+                onChange={handleColorChange}
                 value={values.text}
               />
             </Grid>
@@ -159,15 +168,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 label="Cor de fundo:"
                 id="background"
                 name="background"
-                onChange={(e) => {
-                  console.log(e.target.value)
-                  setStyleConfig(prevState => {
-                    return {
-                      ...prevState,
-                      background: e.target.value
-                    }
-                  })
-                }}
+                onChange={handleColorChange}
                 value={values.background}
               />
             </Grid>
@@ -180,10 +181,11 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 color="primary"
               >
                 Escolher Logo
-                <TextField
+                <Input
                   id="logoUrl"
                   name="logoUrl"
                   type="file"
+                  inputProps={{ accept: 'image/*' }}
                   style={{ display: "none" }}
                   onChange={(e) => {
                     console.log(btoa(e.target.value))
@@ -206,10 +208,11 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                 color="primary"
               >
                 Escolher Imagem Topo
-                <TextField
+                <Input
                   id="topBackgroundUrl"
                   name="topBackgroundUrl"
                   type="file"
+                  inputProps={{ accept: 'image/*' }}
                   style={{ display: "none" }}
                   onChange={(e) => {
                     console.log(btoa(e.target.value))
