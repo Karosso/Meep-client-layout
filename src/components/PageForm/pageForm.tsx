@@ -10,8 +10,15 @@ interface IPageFormProps {
   handleStyleConfig: (data: IFormValues) => void
 }
 
+const toBase64 = (file: Blob) => new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  // console.log(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
 
-const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
+const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
 
   interface IStyleData {
     primary: string;
@@ -30,7 +37,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
     text: '',
     background: '',
     logoUrl: '',
-    topBackgroundUrl: '',  
+    topBackgroundUrl: '',
   };
 
   const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);
@@ -48,8 +55,8 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
       text: event.text,
       background: event.background
     };
-    
-    const card: IFormValues  = {
+
+    const card: IFormValues = {
       colors: colors,
       logoUrl: event.logoUrl,
       topBackgroundUrl: event.topBackgroundUrl
@@ -108,7 +115,7 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
         enableReinitialize
         onSubmit={handleSubmit}
       >
-        {({values, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
+        {({ values, handleSubmit }) => <Form onSubmit={handleSubmit} className="form" >
 
           <Grid spacing={2} container className="form-styles">
 
@@ -187,15 +194,8 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                   type="file"
                   inputProps={{ accept: 'image/*' }}
                   style={{ display: "none" }}
-                  onChange={(e) => {
-                    console.log(btoa(e.target.value))
-                    setStyleConfig(prevState => {
-                      return {
-                        ...prevState,
-                        logoUrl: btoa(e.target.value)
-                      }
-                    })
-                  }}
+                  onChange={handleFileChange}
+                  /* value={values.logoUrl} */
                 />
               </Button>
             </Grid>
@@ -214,19 +214,11 @@ const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
                   type="file"
                   inputProps={{ accept: 'image/*' }}
                   style={{ display: "none" }}
-                  onChange={(e) => {
-                    console.log(btoa(e.target.value))
-                    setStyleConfig(prevState => {
-                      return {
-                        ...prevState,
-                        topBackgroundUrl: btoa(e.target.value)
-                      }
-                    })
-                  }}
+                  onChange={handleFileChange}
+                  /* value={values.topBackgroundUrl} */
                 />
               </Button>
             </Grid>
-            
 
             <Grid className="grid-upload" item xs={12}>
               <Button fullWidth type="submit" color="primary" variant="outlined">Submit</Button>
