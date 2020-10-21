@@ -11,15 +11,8 @@ interface IPageFormProps {
   handleStyleConfig: (data: IFormValues) => void
 }
 
-const toBase64 = (file: Blob) => new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  // console.log(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
 
-const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
+const PageForm: React.FC<IPageFormProps> = ({handleStyleConfig}) => {
 
   interface IStyleData {
     primary: string;
@@ -38,7 +31,7 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
     text: '',
     background: '',
     logoUrl: '',
-    topBackgroundUrl: '',
+    topBackgroundUrl: '',  
   };
 
   const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);
@@ -52,28 +45,16 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
       text: event.text,
       background: event.background
     };
-
-    const card: IFormValues = {
+    
+    const card: IFormValues  = {
       colors: colors,
       logoUrl: event.logoUrl,
       topBackgroundUrl: event.topBackgroundUrl
     };
 
-    handleStyleConfig(card);
+    handleStyleConfig(card);    
     console.log('handlesubmit', colors);
 
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStyleConfig(prev => ({ ...prev, ...{ [event.target.name]: event.target.value } }))
-  }
-
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      event.persist()
-      const fileString = await toBase64(event.target.files[0])
-      setStyleConfig(prev => ({ ...prev, ...{ [event.target?.name]: fileString } }))
-    }
   }
 
   return (
@@ -86,7 +67,7 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
         enableReinitialize
         onSubmit={handleSubmit}
       >
-        {({ values, handleSubmit }) => <Form onSubmit={handleSubmit} className="form" >
+        {({values, handleSubmit}) => <Form onSubmit={handleSubmit} className="form" >
 
           <Grid spacing={2} container className="form-styles">
 
@@ -97,7 +78,15 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 label="Cor primária:"
                 id="primary"
                 name="primary"
-                onChange={handleChange}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      primary: e.target.value
+                    }
+                  })
+                }}
                 value={values.primary}
               />
             </Grid>
@@ -109,7 +98,15 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 label="Cor secundária:"
                 id="secondary"
                 name="secondary"
-                onChange={handleChange}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      secondary: e.target.value
+                    }
+                  })
+                }}
                 value={values.secondary}
               />
             </Grid>
@@ -121,7 +118,15 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 label="Cor de destaque:"
                 id="accent"
                 name="accent"
-                onChange={handleChange}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      accent: e.target.value
+                    }
+                  })
+                }}
                 value={values.accent}
               />
             </Grid>
@@ -133,7 +138,15 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 label="Cor de texto:"
                 id="text"
                 name="text"
-                onChange={handleChange}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      text: e.target.value
+                    }
+                  })
+                }}
                 value={values.text}
               />
             </Grid>
@@ -146,7 +159,15 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 label="Cor de fundo:"
                 id="background"
                 name="background"
-                onChange={handleChange}
+                onChange={(e) => {
+                  console.log(e.target.value)
+                  setStyleConfig(prevState => {
+                    return {
+                      ...prevState,
+                      background: e.target.value
+                    }
+                  })
+                }}
                 value={values.background}
               />
             </Grid>
@@ -159,13 +180,20 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 color="primary"
               >
                 Escolher Logo
-                <input
+                <TextField
                   id="logoUrl"
                   name="logoUrl"
                   type="file"
                   style={{ display: "none" }}
-                  onChange={handleFileChange}
-                  /* value={values.logoUrl} */
+                  onChange={(e) => {
+                    console.log(btoa(e.target.value))
+                    setStyleConfig(prevState => {
+                      return {
+                        ...prevState,
+                        logoUrl: btoa(e.target.value)
+                      }
+                    })
+                  }}
                 />
               </Button>
             </Grid>
@@ -178,16 +206,24 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 color="primary"
               >
                 Escolher Imagem Topo
-                <input
+                <TextField
                   id="topBackgroundUrl"
                   name="topBackgroundUrl"
                   type="file"
                   style={{ display: "none" }}
-                  onChange={handleFileChange}
-                  /* value={values.topBackgroundUrl} */
+                  onChange={(e) => {
+                    console.log(btoa(e.target.value))
+                    setStyleConfig(prevState => {
+                      return {
+                        ...prevState,
+                        topBackgroundUrl: btoa(e.target.value)
+                      }
+                    })
+                  }}
                 />
               </Button>
             </Grid>
+            
 
             <Grid className="grid-upload" item xs={12}>
               <Button fullWidth type="submit" color="primary" variant="outlined">Submit</Button>

@@ -5,7 +5,8 @@ import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } fro
 
 import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 
-import logo from '../../assets/lua.jpg'
+import Logo from '../../assets/lua.jpg'
+import  BackgroundImg from '../../assets/iStock-536613027.jpg'
 
 interface IPageData {
   styleConfig: IFormValues;
