@@ -1,6 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
-import { Button, Container, Grid, TextField, Input } from '@material-ui/core';
+import { Container, Grid, TextField, Input } from '@material-ui/core';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+import { SketchPicker } from 'react-color';
 import { IFormColors, IFormValues } from '../interfaces/IStyleConfig';
 
 import './pageForm.css';
@@ -39,6 +45,35 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
     logoUrl: '',
     topBackgroundUrl: '',
   };
+
+  const [pickerColor, setPickerColor] = useState('');
+
+  const handleChangeComplete = (color: any) => {
+    setPickerColor(color.hex);
+  };
+
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      typography: {
+        padding: theme.spacing(2),
+      },
+    }),
+  );
+
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
 
   const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);
 
@@ -118,6 +153,56 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
         {({ values, handleSubmit }) => <Form onSubmit={handleSubmit} className="form" >
 
           <Grid spacing={2} container className="form-styles">
+
+              
+            
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+            >
+              <Typography className={classes.typography}>
+                <SketchPicker 
+                  color={ pickerColor }
+                  onChangeComplete={ handleChangeComplete }
+                />
+              </Typography>
+            </Popover>
+
+            <Grid item xs={12} className="colorPicker" style={{display: "none"}}>
+
+              <Grid item xs={10} spacing={1}>
+                <Button
+                  aria-describedby={id}
+                  fullWidth
+                  variant="outlined"
+                  component="label"
+                  color="primary"
+                  onClick={ () => handleClick }
+                >
+                  Cor de texto
+                </Button>
+              </Grid>
+
+              <Grid item xs={2}>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  component="label"
+                  style={{backgroundColor: pickerColor, alignSelf: "flex-end"}}
+                >
+                </Button>
+              </Grid>
+            </Grid>
 
             <Grid item xs={12}>
               <TextField

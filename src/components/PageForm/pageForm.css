@@ -16,3 +16,7 @@
 .form-styles .grid-upload Button,label {
     height: 56px;
 }
+
+.colorPicker {
+    display: flex;
+}

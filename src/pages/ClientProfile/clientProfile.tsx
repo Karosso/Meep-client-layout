@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-
-import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 import PageForm from '../../components/PageForm/pageForm';
-
 import PagePreview from '../../components/PagePreview/pagePreview'
+import { IFormValues } from '../../components/interfaces/IStyleConfig';
 
 import './client-profile.css';
-import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 
 function ClientProfile() {
 
@@ -25,19 +23,7 @@ function ClientProfile() {
   });
 
   function handleStyleConfig(data: IFormValues) {
-    // console.log(data)
     setStyleConfig(data)
-   
-  }
-
-  const [logoUrl, setLogoUrl] = useState('');
-  const [topBackgroundUrl, settopBackgroundUrl] = useState('');
-
-  const initialValues: IFormValues = styleConfig;
-
-  function handleChange(event: React.ChangeEvent<{ value: unknown }>) {
-
-    // setColor(String(event.target.value));
   }
 
   return (
@@ -50,8 +36,6 @@ function ClientProfile() {
       <Grid item xs={6}>
         <PagePreview styleConfig={styleConfig}/>
       </Grid>
-
-
 
     </Container>
   );
