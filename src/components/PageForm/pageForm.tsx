@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { Button, Container, Grid, TextField, Input } from '@material-ui/core';
 import { IFormColors, IFormValues } from '../interfaces/IStyleConfig';
+import WhitImg from '../../assets/meep-banner.png';
+import MeepImg from '../../assets/meep.png';
 
 import './pageForm.css';
 
@@ -36,8 +38,8 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
     accent: '',
     text: '',
     background: '',
-    logoUrl: '',
-    topBackgroundUrl: '',
+    logoUrl: MeepImg,
+    topBackgroundUrl: WhitImg,
   };
 
   const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import './pagePreview.css';
-import { Button, ButtonBase, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography } from '@material-ui/core';
 
 import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 
@@ -24,22 +24,26 @@ const PagePreview: React.FC<IPageData> = (props ) => {
   }, [props.styleConfig]);
 
   return (
-    
-    <Grid container xl className="container">    
+    <div className="div-container">
+
+  
+      <h1>Preview Layout</h1>
+    <Grid container xl className="container"  style={{ backgroundColor: props.styleConfig.colors.background}}>    
 
       <Grid className="preview-top" item sm={12}>
 
       <Grid item className="text-top">
-      <h1>Preview Layout</h1>
       </Grid>    
-        <Grid item  className="div-top">
-          
+        <Grid item  className="div-top">          
+             
             <Grid item className="background-top">
-              <img className="background-top-img" alt="[Imagem do banner]" src={props.styleConfig.topBackgroundUrl}/>
-              <Grid item className="logo">
-                <img className="logo-img" alt="[Imagem da logo]" src={props.styleConfig.logoUrl}/>
-              </Grid>    
+                <img className="background-top-img" alt="[Imagem do banner]" src={props.styleConfig.topBackgroundUrl}/>
+
+                  <Grid item className="logo">                   
+                      <img className="logo-img" alt="[Imagem da logo]" src={props.styleConfig.logoUrl}/>
+                  </Grid>    
             </Grid> 
+           
         </Grid> 
           <Paper className="preview-card">
             <Grid container spacing={2} >           
@@ -48,27 +52,27 @@ const PagePreview: React.FC<IPageData> = (props ) => {
                   <Grid item xs className="card">
                     <img className="card-img" alt="[]" src={props.styleConfig.logoUrl}/>
                     <Grid item className="text-card">
-                    <Typography gutterBottom variant="subtitle1">
+                    <Typography gutterBottom variant="subtitle1" style={{ color: props.styleConfig.colors.text}}>
                       Filé com Fritas
                       </Typography>
-                    <Typography variant="body2" gutterBottom>
-                      300g de Filé - 400g de Batata Frita
+                    <Typography variant="body2" gutterBottom  style={{ color: props.styleConfig.colors.text}}>
+                      300g de Filé - 400g de Batata F rita
                     </Typography>    
                     </Grid>                    
                   </Grid>              
                 </Grid>
                     <Grid item>
-                      <Typography variant="subtitle1">R$50.00</Typography>
+                      <Typography variant="subtitle1"  style={{ color: props.styleConfig.colors.text}} >R$50.00</Typography>
                     </Grid>
               </Grid>
             </Grid>
           </Paper>
         </Grid>
-        <Grid item className="footer">
+        <Grid item className="footer"   style={{ backgroundColor: props.styleConfig.colors.primary}}>
             <h2>Ver carrinho</h2>
         </Grid>
       </Grid>
-    
+      </div>
       
   );
 }
