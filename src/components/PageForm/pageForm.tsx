@@ -103,7 +103,7 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
   });
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0].type.split("/")[0] === "image") {
+    if (event.target.files && event.target.files[0]?.type.split("/")[0] === "image") {
       event.persist()
       const fileString = await toBase64(event.target.files[0])
 
