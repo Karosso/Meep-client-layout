@@ -14,6 +14,8 @@ function ClientProfile() {
       primary: '',
       secondary: '',
       accent: '',
+      toolBar: '',
+      toolBarText: '',
       text: '',
       background: '',
     },

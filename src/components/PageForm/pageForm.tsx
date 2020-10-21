@@ -1,81 +1,43 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { Container, Grid, TextField, Input } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import { SketchPicker } from 'react-color';
 import { IFormColors, IFormValues } from '../interfaces/IStyleConfig';
-import WhitImg from '../../assets/meep-banner.png';
-import MeepImg from '../../assets/meep.png';
+import bannerMeepImg from '../../assets/meep-banner.png';
+import logoMeepImg from '../../assets/meep.png';
 
 import './pageForm.css';
-
 
 interface IPageFormProps {
   handleStyleConfig: (data: IFormValues) => void
 }
 
-const toBase64 = (file: Blob) => new Promise<string | ArrayBuffer | null>((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  // console.log(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
+interface IStyleData {
+  primary: string;
+  secondary: string;
+  accent: string;
+  toolBar: string;
+  toolBarText: string;
+  text: string;
+  background: string;
+  logoUrl: string,
+  topBackgroundUrl: string
+}
 
 const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
-
-  interface IStyleData {
-    primary: string;
-    secondary: string;
-    accent: string;
-    text: string;
-    background: string;
-    logoUrl: string,
-    topBackgroundUrl: string
-  }
 
   const styleData: IStyleData = {
     primary: '',
     secondary: '',
     accent: '',
+    toolBar: '',
+    toolBarText: '',
     text: '',
     background: '',
-    logoUrl: MeepImg,
-    topBackgroundUrl: WhitImg,
+    logoUrl: logoMeepImg,
+    topBackgroundUrl: bannerMeepImg,
   };
-
-  const [pickerColor, setPickerColor] = useState('');
-
-  const handleChangeComplete = (color: any) => {
-    setPickerColor(color.hex);
-  };
-
-  const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      typography: {
-        padding: theme.spacing(2),
-      },
-    }),
-  );
-
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
 
   const [styleConfig, setStyleConfig] = useState<IStyleData>(styleData);
 
@@ -89,6 +51,8 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
       primary: event.primary,
       secondary: event.secondary,
       accent: event.accent,
+      toolBar: event.toolBar,
+      toolBarText: event.toolBarText,
       text: event.text,
       background: event.background
     };
@@ -100,7 +64,6 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
     };
 
     handleStyleConfig(card);
-
   }
 
   const onChangePropsSender = (inputStyleProp: IStyleData) => {
@@ -109,6 +72,8 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
       primary: inputStyleProp.primary,
       secondary: inputStyleProp.secondary,
       accent: inputStyleProp.accent,
+      toolBar: inputStyleProp.toolBar,
+      toolBarText: inputStyleProp.toolBarText,
       text: inputStyleProp.text,
       background: inputStyleProp.background
     };
@@ -120,7 +85,6 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
     };
 
     handleStyleConfig(card);
-
   }
 
   const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,6 +93,14 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
       ...{ [event.target.name]: event.target.value } 
     }))
   }
+
+  const toBase64 = (file: Blob) => new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    // console.log(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0].type.split("/")[0] === "image") {
@@ -155,57 +127,7 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
         {({ values, handleSubmit }) => <Form onSubmit={handleSubmit} className="form" >
 
           <Grid spacing={2} container className="form-styles">
-
-              
-            
-            <Popover
-              id={id}
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-            >
-              <Typography className={classes.typography}>
-                <SketchPicker 
-                  color={ pickerColor }
-                  onChangeComplete={ handleChangeComplete }
-                />
-              </Typography>
-            </Popover>
-
-            <Grid item xs={12} className="colorPicker" style={{display: "none"}}>
-
-              <Grid item xs={10} spacing={1}>
-                <Button
-                  aria-describedby={id}
-                  fullWidth
-                  variant="outlined"
-                  component="label"
-                  color="primary"
-                  onClick={ () => handleClick }
-                >
-                  Cor de texto
-                </Button>
-              </Grid>
-
-              <Grid item xs={2}>
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  component="label"
-                  style={{backgroundColor: pickerColor, alignSelf: "flex-end"}}
-                >
-                </Button>
-              </Grid>
-            </Grid>
-
+        
             <Grid item xs={12}>
               <TextField
                 fullWidth
@@ -230,7 +152,7 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ display: "none" }}>
               <TextField
                 fullWidth
                 variant="outlined"
@@ -251,6 +173,30 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
                 name="text"
                 onChange={handleColorChange}
                 value={values.text}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Cor do menu:"
+                id="toolBar"
+                name="toolBar"
+                onChange={handleColorChange}
+                value={values.toolBar}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Cor de texto do menu:"
+                id="toolBarText"
+                name="toolBarText"
+                onChange={handleColorChange}
+                value={values.toolBarText}
               />
             </Grid>
 

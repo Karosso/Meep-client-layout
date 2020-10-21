@@ -9,6 +9,8 @@ export interface IFormValues {
     primary: string;
     secondary: string;
     accent: string;
+    toolBar: string;
+    toolBarText: string;
     text: string;
     background: string;
   }
