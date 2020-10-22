@@ -6,7 +6,6 @@ import PagePreview from '../../components/PagePreview/pagePreview'
 import { IFormValues } from '../../components/interfaces/IStyleConfig';
 
 import './client-profile.css';
-import ColorPicker from '../../components/ColorPicker/colorPicker';
 
 function ClientProfile() {
 
@@ -29,6 +28,8 @@ function ClientProfile() {
     setStyleConfig(data)
   }
 
+  
+
   return (
     <Container id="page-client-profile" maxWidth="xl">
 
@@ -40,7 +41,7 @@ function ClientProfile() {
         <PagePreview styleConfig={styleConfig}/>
       </Grid>
 
-      {/* <ColorPicker styleConfig={styleConfig}/> */}
+      
 
     </Container>
   );

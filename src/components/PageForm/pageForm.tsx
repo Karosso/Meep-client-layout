@@ -8,6 +8,7 @@ import bannerMeepImg from '../../assets/meep-banner.png';
 import logoMeepImg from '../../assets/meep.png';
 
 import './pageForm.css';
+import ColorPicker from '../ColorPicker/colorPicker';
 
 interface IPageFormProps {
   handleStyleConfig: (data: IFormValues) => void
@@ -117,10 +118,19 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
     }
   }
 
+  function handleStyleColorConfig (name: string, color: string) {
+    setStyleConfig(prevState => ({ 
+      ...prevState, 
+      ...{ [name]: color } 
+    }))
+  }
+
   return (
     <Container id="form-client" maxWidth="xl">
 
       <h1>Atributos de Estilização</h1>
+
+
 
       <Formik
         initialValues={styleConfig}
@@ -130,91 +140,70 @@ const PageForm: React.FC<IPageFormProps> = ({ handleStyleConfig }) => {
         {({ values, handleSubmit }) => <Form onSubmit={handleSubmit} className="form" >
 
           <Grid spacing={2} container className="form-styles">
-        
+
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Cor primária:"
-                id="primary"
-                name="primary"
-                onChange={handleColorChange}
-                value={values.primary}
+              <ColorPicker 
+                buttonName={'Cor Primária: '}
+                handleStyleName={'primary'} 
+                handleStyleColor={styleConfig.primary} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
 
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Cor secundária:"
-                id="secondary"
-                name="secondary"
-                onChange={handleColorChange}
-                value={values.secondary}
+              <ColorPicker 
+                buttonName={'Cor secundária: '}
+                handleStyleName={'secondary'} 
+                handleStyleColor={styleConfig.secondary} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
 
             <Grid item xs={12} style={{ display: "none" }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Cor de destaque:"
-                id="accent"
-                name="accent"
-                onChange={handleColorChange}
-                value={values.accent}
+              <ColorPicker 
+                buttonName={'Cor de destaque: '}
+                handleStyleName={'accent'} 
+                handleStyleColor={styleConfig.accent} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Cor de texto:"
-                id="text"
-                name="text"
-                onChange={handleColorChange}
-                value={values.text}
+            <Grid item xs={12} >
+              <ColorPicker 
+                buttonName={'Cor de texto: '}
+                handleStyleName={'text'} 
+                handleStyleColor={styleConfig.text} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Cor do menu:"
-                id="toolBar"
-                name="toolBar"
-                onChange={handleColorChange}
-                value={values.toolBar}
+            <Grid item xs={12} >
+              <ColorPicker 
+                buttonName={'Cor do menu: '}
+                handleStyleName={'toolBar'} 
+                handleStyleColor={styleConfig.toolBar} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Cor de texto do menu:"
-                id="toolBarText"
-                name="toolBarText"
-                onChange={handleColorChange}
-                value={values.toolBarText}
+            <Grid item xs={12} >
+              <ColorPicker 
+                buttonName={'Cor de texto do menu: '}
+                handleStyleName={'toolBarText'} 
+                handleStyleColor={styleConfig.toolBarText} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                color="primary"
-                fullWidth
-                variant="outlined"
-                label="Cor de fundo:"
-                id="background"
-                name="background"
-                onChange={handleColorChange}
-                value={values.background}
+            <Grid item xs={12} >
+              <ColorPicker 
+                buttonName={'Cor de fundo: '}
+                handleStyleName={'background'} 
+                handleStyleColor={styleConfig.background} 
+                handleStyleColorConfig={handleStyleColorConfig}
               />
             </Grid>
+
 
             <Grid className="grid-upload" item xs={12}>
               <Button
