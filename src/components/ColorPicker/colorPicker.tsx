@@ -1,15 +1,12 @@
 import { Button, Grid } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
-
-import { IFormColors, IFormValues } from '../../components/interfaces/IStyleConfig';
 import { SketchPicker } from 'react-color';
-
 
 interface IColorPickerProps {
   handleStyleColorConfig: (name: string, color: string) => void;
@@ -17,7 +14,6 @@ interface IColorPickerProps {
   handleStyleName: string;
   handleStyleColor: string;
 }
-
 
 const ColorPicker: React.FC<IColorPickerProps> = ( {handleStyleColorConfig, buttonName, handleStyleName, handleStyleColor } ) => {
 
@@ -71,13 +67,10 @@ const ColorPicker: React.FC<IColorPickerProps> = ( {handleStyleColorConfig, butt
                 </Typography>
               </Box>
             </Popover>
-
           </div>
         )}
       </PopupState>
-
     </div>
-      
   );
 }
 
