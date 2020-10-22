@@ -1,8 +1,8 @@
-    #page-client-profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+#page-client-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .form {
     display: flex;
@@ -14,4 +14,14 @@
 
 .form-colors TextField {
     width: 100%;
+}
+
+@media (max-width: 700px){
+    #page-client-profile {
+        flex-direction: column;
+    }
+
+    .grid-content {
+        max-width: 90% !important;
+    }
 }
